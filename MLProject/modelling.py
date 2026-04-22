@@ -2,6 +2,7 @@ import pandas as pd
 import mlflow
 import mlflow.sklearn
 import argparse
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--data_path", type=str, default="housepricessdataset_preprocessing")
@@ -9,7 +10,8 @@ args = parser.parse_args()
 
 data_path = args.data_path
 
-mlflow.set_tracking_uri("file:./mlruns")
+if "MLFLOW_TRACKING_URI" not in os.environ:
+    mlflow.set_tracking_uri("file:./mlruns")
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
