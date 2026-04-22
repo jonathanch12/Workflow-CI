@@ -3,6 +3,7 @@ import mlflow
 import mlflow.sklearn
 import argparse
 import os
+import joblib
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--data_path", type=str, default="housepricessdataset_preprocessing")
@@ -47,3 +48,4 @@ mlflow.log_metric("rmse_manual", rmse)
 mlflow.log_metric("r2_manual", r2)
 
 print("Training selesai!")
+joblib.dump(model, "model.pkl")
